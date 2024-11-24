@@ -138,3 +138,5 @@
 /Users/quocthanhpham/Documents/ApplicationTracker/api/obj/Debug/net8.0/api.pdb
 /Users/quocthanhpham/Documents/ApplicationTracker/api/obj/Debug/net8.0/api.genruntimeconfig.cache
 /Users/quocthanhpham/Documents/ApplicationTracker/api/obj/Debug/net8.0/ref/api.dll
+/Users/quocthanhpham/Documents/ApplicationTracker/api/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/Users/quocthanhpham/Documents/ApplicationTracker/api/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
