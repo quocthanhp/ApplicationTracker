@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using api.Data;
 using api.Dtos.Application;
+using api.Helpers;
 using api.Interfaces;
 using api.Models;
 using Microsoft.EntityFrameworkCore;
@@ -17,9 +18,16 @@ namespace api.Repository
         {
             _context = context;
         }
-        public async Task<List<Application>> GetAllAsync()
+        public async Task<List<Application>> GetAllAsync(QueryObject query)
         {
-            return await _context.Applications.ToListAsync();
+            var applications = _context.Applications.AsQueryable();
+
+            if (!string.IsNullOrWhiteSpace(query.CompanyName))
+            {
+                applications = applications.Where(a => a.CompanyName.Contains(query.CompanyName));
+            }
+
+            return await applications.ToListAsync();
         }
 
         public async Task<Application?> GetByIdAsync(int id)
