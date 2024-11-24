@@ -12,8 +12,8 @@ using api.Data;
 namespace api.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20241124053729_SeedRole")]
-    partial class SeedRole
+    [Migration("20241124112032_AddApplications")]
+    partial class AddApplications
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,13 +54,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5b523f3a-507e-4f7f-be74-2754664975be",
+                            Id = "75bac448-69f9-436d-b6da-c28e74d005fb",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "1f3d556b-c3b9-447f-ad58-749df3d5cf6b",
+                            Id = "355601df-8b0a-471e-8ff9-4b9f770b34a5",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -275,7 +275,13 @@ namespace api.Migrations
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Applications");
                 });
@@ -329,6 +335,22 @@ namespace api.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("api.Models.Application", b =>
+                {
+                    b.HasOne("api.Models.AppUser", "User")
+                        .WithMany("Applications")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("api.Models.AppUser", b =>
+                {
+                    b.Navigation("Applications");
                 });
 #pragma warning restore 612, 618
         }

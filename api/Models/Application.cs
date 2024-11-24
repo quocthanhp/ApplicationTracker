@@ -20,5 +20,9 @@ namespace api.Models
         public ApplicationStatus Status { get; set; }
         public string Notes { get; set; } = string.Empty;
         public string JobDescription { get; set; } = string.Empty;
+
+        [ForeignKey("UserId")]
+        public string UserId { get; set; }
+        public AppUser? User { get; set; }
     }
 }

@@ -22,6 +22,12 @@ namespace api.Data
         {
             base.OnModelCreating(builder);
 
+            builder.Entity<Application>()
+               .HasOne(a => a.User) // Each Application has one User
+               .WithMany(u => u.Applications) // Each User has many Applications
+               .HasForeignKey(a => a.UserId) // Foreign key in Application
+               .OnDelete(DeleteBehavior.Cascade); // Delete Applications if User is deleted
+
             List<IdentityRole> roles = new List<IdentityRole>
             {
                 new IdentityRole { Name = "Admin", NormalizedName = "ADMIN" },
