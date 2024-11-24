@@ -50,5 +50,17 @@ namespace api.Repository
             await _context.SaveChangesAsync();
             return application;
         }
+
+        public async Task<Application?> DeleteAsync(int id)
+        {
+            var application = await _context.Applications.FirstOrDefaultAsync(a => a.Id == id);
+            if (application == null)
+            {
+                return null;
+            }
+            _context.Applications.Remove(application);
+            await _context.SaveChangesAsync();
+            return application;
+        }
     }
 }

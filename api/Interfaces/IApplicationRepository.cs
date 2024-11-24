@@ -13,6 +13,7 @@ namespace api.Interfaces
         Task<Application?> GetByIdAsync(int id); // ? means nullable because FirstOrDefaultAsync can return null
         Task<Application> CreateAsync(Application application);
         Task<Application?> UpdateAsync(int id, UpdateApplicationRequestDto applicationDto);
+        Task<Application?> DeleteAsync(int id);
 
     }
 }

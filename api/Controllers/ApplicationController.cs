@@ -83,5 +83,21 @@ namespace api.Controllers
             return Ok(application.ToApplicationDto());
         }
 
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete([FromRoute] int id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var application = await _applicationRepo.DeleteAsync(id);
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            return NoContent();
+        }
+
     }
 }
