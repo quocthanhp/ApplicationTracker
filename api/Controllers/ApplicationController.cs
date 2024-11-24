@@ -66,5 +66,22 @@ namespace api.Controllers
             return CreatedAtAction(nameof(GetById), new { id = application.Id }, application.ToApplicationDto());
         }
 
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateApplicationRequestDto applicationDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var application = await _applicationRepo.UpdateAsync(id, applicationDto);
+            if (application == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(application.ToApplicationDto());
+        }
+
     }
 }

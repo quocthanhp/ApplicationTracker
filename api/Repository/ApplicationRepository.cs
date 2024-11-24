@@ -33,5 +33,22 @@ namespace api.Repository
             await _context.SaveChangesAsync();
             return application;
         }
+
+        public async Task<Application?> UpdateAsync(int id, UpdateApplicationRequestDto applicationDto)
+        {
+            var application = await _context.Applications.FirstOrDefaultAsync(a => a.Id == id);
+            if (application == null)
+            {
+                return null;
+            }
+            application.CompanyName = applicationDto.CompanyName;
+            application.JobTitle = applicationDto.JobTitle;
+            application.Location = applicationDto.Location;
+            application.Salary = applicationDto.Salary;
+            application.Notes = applicationDto.Notes;
+            application.JobDescription = applicationDto.JobDescription;
+            await _context.SaveChangesAsync();
+            return application;
+        }
     }
 }
