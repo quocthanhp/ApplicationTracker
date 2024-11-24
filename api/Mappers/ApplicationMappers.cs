@@ -24,5 +24,20 @@ namespace api.Mappers
                 JobDescription = application.JobDescription
             };
         }
+
+        public static Application ToApplicationFromCreateDto(this CreateApplicationRequestDto createApplicationRequestDto)
+        {
+            return new Application
+            {
+                // Logo = createApplicationRequestDto.Logo,
+                CompanyName = createApplicationRequestDto.CompanyName,
+                JobTitle = createApplicationRequestDto.JobTitle,
+                Location = createApplicationRequestDto.Location,
+                Salary = createApplicationRequestDto.Salary,
+                Status = Data.Enum.ApplicationStatus.Applied,
+                Notes = string.Empty,
+                JobDescription = createApplicationRequestDto.JobDescription
+            };
+        }
     }
 }

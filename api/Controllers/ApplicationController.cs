@@ -51,7 +51,20 @@ namespace api.Controllers
                 return NotFound();
             }
             return Ok(application.ToApplicationDto());
-        }  
-        
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([FromBody] CreateApplicationRequestDto applicationDto)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var application = applicationDto.ToApplicationFromCreateDto();
+            await _applicationRepo.CreateAsync(application);
+            return CreatedAtAction(nameof(GetById), new { id = application.Id }, application.ToApplicationDto());
+        }
+
     }
 }

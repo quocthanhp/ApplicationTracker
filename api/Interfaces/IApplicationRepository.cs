@@ -10,6 +10,7 @@ namespace api.Interfaces
     {
         Task<List<Application>> GetAllAsync();  
         Task<Application?> GetByIdAsync(int id); // ? means nullable because FirstOrDefaultAsync can return null
-       
+        Task<Application> CreateAsync(Application application);
+
     }
 }

@@ -25,6 +25,13 @@ namespace api.Repository
         public async Task<Application?> GetByIdAsync(int id)
         {
             return await _context.Applications.FindAsync(id);
-        }   
+        }
+
+        public async Task<Application> CreateAsync(Application application)
+        {
+            await _context.Applications.AddAsync(application);
+            await _context.SaveChangesAsync();
+            return application;
+        }
     }
 }
