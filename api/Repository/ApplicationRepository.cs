@@ -18,9 +18,9 @@ namespace api.Repository
         {
             _context = context;
         }
-        public async Task<List<Application>> GetAllAsync(QueryObject query)
+        public async Task<List<Application>> GetAllAsync(QueryObject query, string userId)
         {
-            var applications = _context.Applications.AsQueryable();
+            var applications = _context.Applications.Where(a => a.UserId == userId).AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(query.CompanyName))
             {
@@ -30,9 +30,11 @@ namespace api.Repository
             return await applications.ToListAsync();
         }
 
-        public async Task<Application?> GetByIdAsync(int id)
+        public async Task<Application?> GetByIdAsync(int id, string userId)
         {
-            return await _context.Applications.FindAsync(id);
+            return await _context.Applications
+                    .Where(a => a.Id == id && a.UserId == userId)
+                    .FirstOrDefaultAsync(); 
         }
 
         public async Task<Application> CreateAsync(Application application)

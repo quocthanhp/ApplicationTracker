@@ -23,8 +23,8 @@ namespace api.Dtos.Application
         [Required]
         [Range(0, 1000000000)]
         public decimal Salary { get; set; }
-        // public ApplicationStatus Status { get; set; }
-        // public string Notes { get; set; } = string.Empty;
+        public ApplicationStatus Status { get; set; }
+        public string Notes { get; set; } = string.Empty;
         [Required]
         [MaxLength(10000, ErrorMessage = "Job Description cannot be over 10000 characters")]
         public string JobDescription { get; set; } = string.Empty;

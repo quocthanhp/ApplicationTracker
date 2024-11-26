@@ -10,8 +10,8 @@ namespace api.Interfaces
 {
     public interface IApplicationRepository
     {
-        Task<List<Application>> GetAllAsync(QueryObject query);  
-        Task<Application?> GetByIdAsync(int id); // ? means nullable because FirstOrDefaultAsync can return null
+        Task<List<Application>> GetAllAsync(QueryObject query, string userId);  
+        Task<Application?> GetByIdAsync(int id, string userId); // ? means nullable because FirstOrDefaultAsync can return null
         Task<Application> CreateAsync(Application application);
         Task<Application?> UpdateAsync(int id, UpdateApplicationRequestDto applicationDto);
         Task<Application?> DeleteAsync(int id);

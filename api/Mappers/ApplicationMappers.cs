@@ -34,7 +34,7 @@ namespace api.Mappers
                 JobTitle = createApplicationRequestDto.JobTitle,
                 Location = createApplicationRequestDto.Location,
                 Salary = createApplicationRequestDto.Salary,
-                Status = Data.Enum.ApplicationStatus.Applied,
+                Status = createApplicationRequestDto.Status,
                 Notes = string.Empty,
                 JobDescription = createApplicationRequestDto.JobDescription
             };
