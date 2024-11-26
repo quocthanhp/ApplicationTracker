@@ -24,12 +24,14 @@ namespace api.Controllers
         public readonly IApplicationRepository _applicationRepo;
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogoService _logoService;
-        public ApplicationController(ApplicationDBContext context, IApplicationRepository applicationRepository, UserManager<AppUser> userManager, ILogoService logoService)
+        private readonly IKeyPhaseExtraction _keyPhaseExtraction;
+        public ApplicationController(ApplicationDBContext context, IApplicationRepository applicationRepository, UserManager<AppUser> userManager, ILogoService logoService, IKeyPhaseExtraction keyPhaseExtraction)
         {
             _context = context;
             _applicationRepo = applicationRepository;
             _userManager = userManager;
             _logoService = logoService;
+            _keyPhaseExtraction = keyPhaseExtraction;
         }
 
         [HttpGet]
@@ -104,6 +106,9 @@ namespace api.Controllers
             {
                 application.Logo = "";
             }
+
+            var keywords = await _keyPhaseExtraction.GetKeyPhaseAsync(application.JobDescription);
+            application.Keywords = keywords;
 
             await _applicationRepo.CreateAsync(application);
             return CreatedAtAction(nameof(GetById), new { id = application.Id }, application.ToApplicationDto());

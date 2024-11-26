@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace api.Migrations
 {
     /// <inheritdoc />
-    public partial class AddApplications : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -87,7 +87,8 @@ namespace api.Migrations
                     Status = table.Column<int>(type: "int", nullable: false),
                     Notes = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     JobDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Keywords = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -190,8 +191,8 @@ namespace api.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "355601df-8b0a-471e-8ff9-4b9f770b34a5", null, "User", "USER" },
-                    { "75bac448-69f9-436d-b6da-c28e74d005fb", null, "Admin", "ADMIN" }
+                    { "0cb53dcf-0065-46d5-8d74-7862a7c0cd16", null, "Admin", "ADMIN" },
+                    { "3edd384c-7265-47ad-b9b2-c130cbb6dd1b", null, "User", "USER" }
                 });
 
             migrationBuilder.CreateIndex(

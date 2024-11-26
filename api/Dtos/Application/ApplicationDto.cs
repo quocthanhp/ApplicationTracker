@@ -17,5 +17,6 @@ namespace api.Dtos.Application
         public ApplicationStatus Status { get; set; }
         public string Notes { get; set; } = string.Empty;
         public string JobDescription { get; set; } = string.Empty;
+        public List<string> Keywords { get; set; } = new List<string>();
     }
 }

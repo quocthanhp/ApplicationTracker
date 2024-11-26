@@ -24,5 +24,7 @@ namespace api.Models
         [ForeignKey("UserId")]
         public string UserId { get; set; }
         public AppUser? User { get; set; }
+
+        public List<string> Keywords { get; set; } = new List<string>();
     }
 }

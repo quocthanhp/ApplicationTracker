@@ -21,7 +21,8 @@ namespace api.Mappers
                 Salary = application.Salary,
                 Status = application.Status,
                 Notes = application.Notes,
-                JobDescription = application.JobDescription
+                JobDescription = application.JobDescription,
+                Keywords = application.Keywords
             };
         }
 

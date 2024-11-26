@@ -49,22 +49,28 @@ DotNetEnv.Env.Load(".env");
 
 // Retrieve the connection string from the environment
 var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION_STRING");
-
 if (string.IsNullOrEmpty(connectionString))
 {
     throw new InvalidOperationException("The ConnectionString property has not been initialized.");
 }
 
 var logoApiKey = Environment.GetEnvironmentVariable("LOGO_API_KEY");
-
 if (string.IsNullOrEmpty(logoApiKey))
 {
     throw new InvalidOperationException("The LogoApiKey property has not been initialized.");
 }
 
+var azureAIApiKey = Environment.GetEnvironmentVariable("AZURE_AI_API_KEY");
+if (string.IsNullOrEmpty(azureAIApiKey))
+{
+    throw new InvalidOperationException("The AzureAIApiKey property has not been initialized.");
+}
+
+
 builder.Configuration.AddInMemoryCollection(new Dictionary<string, string?>
 { {"ConnectionStrings:DefaultConnection", connectionString },
-    {"ConnectionStrings:LogoApiKey", logoApiKey}
+    {"ConnectionStrings:LogoApiKey", logoApiKey},
+    {"ConnectionStrings:AzureAIApiKey", azureAIApiKey},
 });
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
@@ -106,6 +112,7 @@ builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<ILogoService, LogoService>();
 builder.Services.AddHttpClient<ILogoService, LogoService>();
+builder.Services.AddScoped<IKeyPhaseExtraction, KeyPhaseExtractionService>();
 
 var app = builder.Build();
 

@@ -140,3 +140,8 @@
 /Users/quocthanhpham/Documents/ApplicationTracker/api/obj/Debug/net8.0/ref/api.dll
 /Users/quocthanhpham/Documents/ApplicationTracker/api/bin/Debug/net8.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
 /Users/quocthanhpham/Documents/ApplicationTracker/api/bin/Debug/net8.0/Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+/Users/quocthanhpham/Documents/ApplicationTracker/api/bin/Debug/net8.0/Azure.AI.TextAnalytics.dll
+/Users/quocthanhpham/Documents/ApplicationTracker/api/bin/Debug/net8.0/Azure.AI.OpenAI.dll
+/Users/quocthanhpham/Documents/ApplicationTracker/api/bin/Debug/net8.0/OpenAI.dll
+/Users/quocthanhpham/Documents/ApplicationTracker/api/bin/Debug/net8.0/System.ClientModel.dll
+/Users/quocthanhpham/Documents/ApplicationTracker/api/bin/Debug/net8.0/Newtonsoft.Json.dll

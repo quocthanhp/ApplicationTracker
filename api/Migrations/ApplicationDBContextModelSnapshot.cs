@@ -51,13 +51,13 @@ namespace api.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "75bac448-69f9-436d-b6da-c28e74d005fb",
+                            Id = "0cb53dcf-0065-46d5-8d74-7862a7c0cd16",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "355601df-8b0a-471e-8ff9-4b9f770b34a5",
+                            Id = "3edd384c-7265-47ad-b9b2-c130cbb6dd1b",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -251,6 +251,10 @@ namespace api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("JobTitle")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Keywords")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
