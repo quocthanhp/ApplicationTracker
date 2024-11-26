@@ -23,11 +23,13 @@ namespace api.Controllers
         public readonly ApplicationDBContext _context;
         public readonly IApplicationRepository _applicationRepo;
         private readonly UserManager<AppUser> _userManager;
-        public ApplicationController(ApplicationDBContext context, IApplicationRepository applicationRepository, UserManager<AppUser> userManager)
+        private readonly ILogoService _logoService;
+        public ApplicationController(ApplicationDBContext context, IApplicationRepository applicationRepository, UserManager<AppUser> userManager, ILogoService logoService)
         {
             _context = context;
             _applicationRepo = applicationRepository;
             _userManager = userManager;
+            _logoService = logoService;
         }
 
         [HttpGet]
@@ -93,6 +95,16 @@ namespace api.Controllers
 
             var application = applicationDto.ToApplicationFromCreateDto();
             application.UserId = appUser.Id;
+            
+            var logo_url = await _logoService.GetLogoAsync(application.CompanyName);
+            if (logo_url != null)
+            {
+                application.Logo = logo_url;
+            } else 
+            {
+                application.Logo = "";
+            }
+
             await _applicationRepo.CreateAsync(application);
             return CreatedAtAction(nameof(GetById), new { id = application.Id }, application.ToApplicationDto());
         }

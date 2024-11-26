@@ -55,8 +55,16 @@ if (string.IsNullOrEmpty(connectionString))
     throw new InvalidOperationException("The ConnectionString property has not been initialized.");
 }
 
+var logoApiKey = Environment.GetEnvironmentVariable("LOGO_API_KEY");
+
+if (string.IsNullOrEmpty(logoApiKey))
+{
+    throw new InvalidOperationException("The LogoApiKey property has not been initialized.");
+}
+
 builder.Configuration.AddInMemoryCollection(new Dictionary<string, string?>
-{ {"ConnectionStrings:DefaultConnection", connectionString }
+{ {"ConnectionStrings:DefaultConnection", connectionString },
+    {"ConnectionStrings:LogoApiKey", logoApiKey}
 });
 
 builder.Services.AddDbContext<ApplicationDBContext>(options =>
@@ -96,6 +104,8 @@ builder.Services.AddAuthentication(options => {
 
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+builder.Services.AddScoped<ILogoService, LogoService>();
+builder.Services.AddHttpClient<ILogoService, LogoService>();
 
 var app = builder.Build();
 

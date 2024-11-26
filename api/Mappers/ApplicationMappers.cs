@@ -29,7 +29,6 @@ namespace api.Mappers
         {
             return new Application
             {
-                // Logo = createApplicationRequestDto.Logo,
                 CompanyName = createApplicationRequestDto.CompanyName,
                 JobTitle = createApplicationRequestDto.JobTitle,
                 Location = createApplicationRequestDto.Location,
