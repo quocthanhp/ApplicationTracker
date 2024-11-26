@@ -30,16 +30,21 @@ namespace api.Service
                 AzureOpenAIClient azureClient = new(new Uri(endpoint), credential);
                 ChatClient chatClient = azureClient.GetChatClient("gpt-4-32k");
 
-                ChatCompletion completion = chatClient.CompleteChat(
+                ChatCompletion completion = await chatClient.CompleteChatAsync (
                     new ChatMessage[] {
                         new SystemChatMessage("You are an AI assistant that extract soft skills and hard skills as keywords (1 to 4 in length) from job description and returns result in a list like [a, b, c]."),
                         new UserChatMessage(jobDescription)
                     }
                 );
 
-                Console.Write(completion.Content[0].Text);
+                var keyPhases = StringListConverter.ConvertStringToList(completion.Content[0].Text);
 
-                return StringListConverter.ConvertStringToList(completion.Content[0].Text);
+                if (keyPhases  == null)
+                {
+                    return [];
+                }
+
+                return keyPhases;
             }
             catch (Exception ex)
             {

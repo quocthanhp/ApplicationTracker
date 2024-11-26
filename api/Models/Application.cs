@@ -22,7 +22,7 @@ namespace api.Models
         public string JobDescription { get; set; } = string.Empty;
 
         [ForeignKey("UserId")]
-        public string UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
         public AppUser? User { get; set; }
 
         public List<string> Keywords { get; set; } = new List<string>();
